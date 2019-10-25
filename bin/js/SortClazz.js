@@ -18,6 +18,7 @@ var util;
                 return;
             }
             SortClazz.quickSortHandle(arr, 0, leng - 1);
+            Math.floor;
             console.log(arr);
         };
         SortClazz.quickSortHandle = function (arr, beginIndex, endIndex) {
