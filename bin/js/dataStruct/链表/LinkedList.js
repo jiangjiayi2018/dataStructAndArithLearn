@@ -74,8 +74,75 @@ var LinkedList;
             var tailer = LinkedListClazz.createBothLinkedList(count);
             LinkedListClazz.consoleNodeInverted(tailer);
         };
+        LinkedListClazz.addCacheData = function (str) {
+            if (!LinkedListClazz.header) {
+                LinkedListClazz.header = new LinkedListNode(str);
+                LinkedListClazz.linkedLength++;
+                return true;
+            }
+            var pre = null;
+            var current = LinkedListClazz.header;
+            var isFindNode = false;
+            while (current) {
+                if (current.data === str) {
+                    if (current === LinkedListClazz.header) {
+                        LinkedListClazz.header = null;
+                    }
+                    else {
+                        pre.next = current.next;
+                        current.next = null;
+                    }
+                    isFindNode = true;
+                    break;
+                }
+                else {
+                    pre = current;
+                    current = current.next;
+                }
+            }
+            if (isFindNode) {
+                LinkedListClazz.insertHeader(str, LinkedListClazz.header);
+            }
+            else {
+                if (LinkedListClazz.linkedLength === 10) {
+                    LinkedListClazz.removeTailer(LinkedListClazz.header);
+                }
+                else {
+                    LinkedListClazz.insertHeader(str, LinkedListClazz.header);
+                    LinkedListClazz.linkedLength++;
+                }
+            }
+        };
+        LinkedListClazz.insertHeader = function (str, header) {
+            if (!header) {
+                header = new LinkedListNode(str);
+            }
+            else {
+                var newNode = new LinkedListNode(str);
+                newNode.next = header.next;
+                header.next = newNode;
+            }
+        };
+        LinkedListClazz.removeTailer = function (header) {
+            if (!header || !header.next) {
+                header = null;
+                return;
+            }
+            var current = header;
+            while (true) {
+                if (!current.next.next) {
+                    current.next = null;
+                    break;
+                }
+                else {
+                    current = current.next;
+                }
+            }
+        };
         return LinkedListClazz;
     }());
+    LinkedListClazz.header = null;
+    LinkedListClazz.linkedLength = 0;
     LinkedList.LinkedListClazz = LinkedListClazz;
     var LinkedListNode = (function () {
         function LinkedListNode(data) {
