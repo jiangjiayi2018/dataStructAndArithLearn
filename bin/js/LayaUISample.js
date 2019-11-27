@@ -8,7 +8,7 @@ var TestUI = (function (_super) {
     function TestUI() {
         var _this = _super.call(this) || this;
         //btn是编辑器界面设定的，代码里面能直接使用，并且有代码提示
-        _this.btn.on(Laya.Event.CLICK, _this, _this.onBtnClick);
+        _this.btn.on(Laya.Event.CLICK, _this, _this.onBtnClick, [23]);
         _this.btn2.on(Laya.Event.CLICK, _this, _this.testFun);
         [4, 5, 13, 3, 2, 1, 4, 8, 6, 3, 2, 1];
         return _this;
@@ -329,6 +329,13 @@ var TestUI = (function (_super) {
         return -1;
     };
     TestUI.prototype.onBtnClick = function () {
+        var part = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            part[_i] = arguments[_i];
+        }
+        for (var i = 0, leng = part.length; i < leng; ++i) {
+            console.log("**************", part[i]);
+        }
         //手动控制组件属性
         this.radio.selectedIndex = 1;
         this.clip.index = 8;

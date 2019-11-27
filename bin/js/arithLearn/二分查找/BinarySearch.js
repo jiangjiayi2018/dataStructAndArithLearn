@@ -69,6 +69,110 @@ var binarySearch;
             console.log("********************", count);
             return Number(mid.toFixed(n));
         };
+        /**第一个等于指定值的元素*/
+        BinarySearch.search1 = function (arr, val) {
+            var leng = arr.length;
+            if (leng < 1) {
+                return -1;
+            }
+            sort.sort.quickSort(arr);
+            var low = 0;
+            var high = leng - 1;
+            var mid;
+            while (low <= high) {
+                mid = Math.floor(low + (high - low) / 2);
+                if (val < arr[mid]) {
+                    high = mid - 1;
+                }
+                else if (val > arr[mid]) {
+                    low = mid + 1;
+                }
+                else {
+                    if (mid === 0 || arr[mid - 1] !== val) {
+                        return mid;
+                    }
+                    else {
+                        high = mid - 1;
+                    }
+                }
+            }
+            return -1;
+        };
+        BinarySearch.search2 = function (arr, val) {
+            var leng = arr.length;
+            if (leng < 1) {
+                return -1;
+            }
+            var low = 0;
+            var high = leng - 1;
+            var mid;
+            while (low <= high) {
+                mid = Math.floor(low + (high - low) / 2);
+                if (val < arr[mid]) {
+                    high = mid - 1;
+                }
+                else if (val > arr[mid]) {
+                    low = mid + 1;
+                }
+                else {
+                    if (mid === leng - 1 || arr[mid + 1] !== val) {
+                        return mid;
+                    }
+                    else {
+                        low = mid + 1;
+                    }
+                }
+            }
+            return -1;
+        };
+        BinarySearch.search3 = function (arr, val) {
+            var leng = arr.length;
+            if (leng < 1) {
+                return -1;
+            }
+            var low = 0;
+            var high = leng - 1;
+            var mid;
+            while (low <= high) {
+                mid = Math.floor(low + (high - low) / 2);
+                if (val <= arr[mid]) {
+                    if (mid === 0 || arr[mid - 1] < val) {
+                        return mid;
+                    }
+                    else {
+                        high = mid - 1;
+                    }
+                }
+                else {
+                    low = mid + 1;
+                }
+            }
+            return -1;
+        };
+        BinarySearch.search4 = function (arr, val) {
+            var leng = arr.length;
+            if (leng < 1) {
+                return -1;
+            }
+            var low = 0;
+            var high = leng - 1;
+            var mid;
+            while (low <= high) {
+                mid = Math.floor(low + (high - low) / 2);
+                if (val < arr[mid]) {
+                    high = mid - 1;
+                }
+                else {
+                    if (mid === leng - 1 || arr[mid + 1] > val) {
+                        return mid;
+                    }
+                    else {
+                        low = mid + 1;
+                    }
+                }
+            }
+            return -1;
+        };
         return BinarySearch;
     }());
     binarySearch.BinarySearch = BinarySearch;
